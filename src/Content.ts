@@ -2,7 +2,6 @@
 import http from "http"; //  https://nodejs.org/docs/latest-v14.x/api/http.html
 import { join } from "path";
 import url from "url"; //  https://nodejs.org/docs/latest-v14.x/api/url.html
-import Solution from "./Solution";
 
 export default class Content {
     public static content(req: http.IncomingMessage, res: http.ServerResponse): void {
@@ -27,7 +26,7 @@ export default class Content {
         const params = new url.URL(req.url as string, `http://${req.headers.host}/`).searchParams;
 
         // Kezd a kódolást innen -->
-        
+
         // <---- Fejezd be a kódolást
 
         res.write("</pre></form></body></html>");
