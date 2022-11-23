@@ -20,6 +20,22 @@ export default class Solution {
             });
     }
 
+    public lastMeasurement(code: string) {
+        const times: string[] = [];
+        this._weatherMesurements.forEach(m => {
+            if (m.city === code) {
+                times.push(m.time.toString());
+            } else {
+                return "soha";
+            }
+        });
+
+        const answer = times[times.length - 1];
+        const hour = answer.slice(0, 2);
+        const minute = answer.slice(2, 4);
+        return `${hour}:${minute}`;
+    }
+
     public get calmWind(): Measurement[] {
         const noWindCities: Measurement[] = [];
         this._weatherMesurements.forEach(e => {
