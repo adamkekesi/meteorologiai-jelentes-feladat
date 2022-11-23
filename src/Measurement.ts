@@ -1,4 +1,4 @@
-export default class Measurements {
+export default class Measurement {
     protected _city: string;
     protected _time: string;
     protected _windDirection: string;
@@ -13,12 +13,20 @@ export default class Measurements {
         return this._windSpeed;
     }
 
-    public get city(): string {
+    public get time(): string {
+        return this._time;
+    }
+
+    public get city() {
         return this._city;
     }
 
-    public get time(): string {
-        return this._time;
+    public get temperature() {
+        return this._temperature;
+    }
+
+    public get hour() {
+        return +this._time.slice(0, 2);
     }
 
     constructor(line: string) {
