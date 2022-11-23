@@ -108,4 +108,34 @@ export default class Solution {
         }
         return result;
     }
+
+    public maxTemp() {
+        let max = 0;
+        this._weatherMesurements.forEach(m => {
+            if (m.temperature > max) {
+                max = m.temperature;
+            }
+        });
+
+        this._weatherMesurements.forEach(m => {
+            if (m.temperature === max) {
+                return `${m.city} ${m.hour} ${m.temperature}`;
+            }
+        });
+    }
+
+    public minTemp() {
+        let min = 20;
+        this._weatherMesurements.forEach(m => {
+            if (m.temperature < min) {
+                min = m.temperature;
+            }
+        });
+
+        this._weatherMesurements.forEach(m => {
+            if (m.temperature === min) {
+                return `${m.city} ${m.hour} ${m.temperature}`;
+            }
+        });
+    }
 }
