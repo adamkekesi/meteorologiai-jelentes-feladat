@@ -5,6 +5,22 @@ export default class Measurements {
     protected _windSpeed: string;
     protected _temperature: number;
 
+    public get windDirection(): string {
+        return this._windDirection;
+    }
+
+    public get windSpeed(): string {
+        return this._windSpeed;
+    }
+
+    public get city(): string {
+        return this._city;
+    }
+
+    public get time(): string {
+        return this._time;
+    }
+
     constructor(line: string) {
         const m: string[] = line.split(" ");
         this._city = m[0];
