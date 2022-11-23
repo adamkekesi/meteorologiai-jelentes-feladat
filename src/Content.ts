@@ -42,15 +42,18 @@ export default class Content {
         res.write("4. feladat: \n");
         if (s.calmWind.length != 0) {
             s.calmWind.forEach(e => {
-                res.write(`${e.city} ${e.time.slice(0, 2)}:${e.time.slice(2, 4)}\n`);
+                res.write(
+                    `${e.city} ${e.time.slice(0, 2)}:${e.time.slice(2, 4)}\n`,
+                );
             });
         } else {
             res.write("Nem volt szélcsend a mérések idején.");
         }
-        
+
         res.write("5. feladat\n");
-        for (const key in s.cityData) {
-            const { fluctuation, mediumTemperature } = s.cityData[key];
+        const temperatureData = s.temperatureData;
+        for (const key in temperatureData) {
+            const { fluctuation, mediumTemperature } = s.temperatureData[key];
 
             if (mediumTemperature !== null) {
                 res.write(
@@ -61,6 +64,9 @@ export default class Content {
             }
         }
 
+        res.write("6. feladat\n");
+        res.write("A fájlok elkészültek.\n");
+        s.writeWindDataToFile(join(__dirname , "..\\"));
         // <---- Fejezd be a kódolást
 
         res.write("</pre></form></body></html>");
