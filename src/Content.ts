@@ -2,6 +2,7 @@
 import http from "http"; //  https://nodejs.org/docs/latest-v14.x/api/http.html
 import { join } from "path";
 import url from "url"; //  https://nodejs.org/docs/latest-v14.x/api/url.html
+import Solution from "./solution";
 
 export default class Content {
     public static content(req: http.IncomingMessage, res: http.ServerResponse): void {
@@ -26,7 +27,9 @@ export default class Content {
         const params = new url.URL(req.url as string, `http://${req.headers.host}/`).searchParams;
 
         // Kezd a kódolást innen -->
+        const s: Solution = new Solution("tavirathu13.txt");
 
+        console.log(s);
         // <---- Fejezd be a kódolást
 
         res.write("</pre></form></body></html>");
