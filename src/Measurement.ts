@@ -29,6 +29,20 @@ export default class Measurement {
         return +this._time.slice(0, 2);
     }
 
+    public get windSpeedDisplay(){
+        let result = "";
+        for (let i = 0; i < +this.windSpeed; i++) {
+            result += "#";
+            
+        }
+
+        return result;
+    }
+
+    public get timeDisplay(){
+        return this.time.slice(0, 2) +":"+ this.time.slice(2, 4);
+    }
+
     constructor(line: string) {
         const m: string[] = line.split(" ");
         this._city = m[0];
