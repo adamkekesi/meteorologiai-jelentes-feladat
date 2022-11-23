@@ -3,7 +3,7 @@ import Measurement from "./Measurement";
 import { Dictionary } from "./types";
 
 interface PlaceData {
-    mediumTemperature: number|null;
+    mediumTemperature: number | null;
     fluctuation: number;
 }
 
@@ -18,6 +18,19 @@ export default class Solution {
                 const curLine = line.trim();
                 this._weatherMesurements.push(new Measurement(curLine));
             });
+    }
+
+    public get calmWind(): Measurement[] {
+        const noWindCities: Measurement[] = [];
+        this._weatherMesurements.forEach(e => {
+            if (
+                parseInt(e.windDirection) === 0 &&
+                parseInt(e.windSpeed) === 0
+            ) {
+                noWindCities.push(e);
+            }
+        });
+        return noWindCities;
     }
 
     public get cityData() {
@@ -58,10 +71,10 @@ export default class Solution {
                 (acc, cur) => acc + (cur ? 1 : 0),
                 0,
             );
-            let mediumTemperature: number|null;
+            let mediumTemperature: number | null;
 
             if (measurementCount < 4) {
-                mediumTemperature =null;
+                mediumTemperature = null;
             } else {
                 const sum = data.measurements.reduce(
                     (acc, cur) => acc + cur.temperature,

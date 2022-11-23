@@ -5,6 +5,18 @@ export default class Measurement {
     protected _windSpeed: string;
     protected _temperature: number;
 
+    public get windDirection(): string {
+        return this._windDirection;
+    }
+
+    public get windSpeed(): string {
+        return this._windSpeed;
+    }
+
+    public get time(): string {
+        return this._time;
+    }
+
     public get city() {
         return this._city;
     }
@@ -13,8 +25,8 @@ export default class Measurement {
         return this._temperature;
     }
 
-    public get hour(){
-        return +this._time.slice(0,2);
+    public get hour() {
+        return +this._time.slice(0, 2);
     }
 
     constructor(line: string) {

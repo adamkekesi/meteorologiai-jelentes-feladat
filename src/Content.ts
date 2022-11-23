@@ -39,6 +39,15 @@ export default class Content {
         // Kezd a kódolást innen -->
         const s: Solution = new Solution("tavirathu13.txt");
 
+        res.write("4. feladat: \n");
+        if (s.calmWind.length != 0) {
+            s.calmWind.forEach(e => {
+                res.write(`${e.city} ${e.time.slice(0, 2)}:${e.time.slice(2, 4)}\n`);
+            });
+        } else {
+            res.write("Nem volt szélcsend a mérések idején.");
+        }
+        
         res.write("5. feladat\n");
         for (const key in s.cityData) {
             const { fluctuation, mediumTemperature } = s.cityData[key];
