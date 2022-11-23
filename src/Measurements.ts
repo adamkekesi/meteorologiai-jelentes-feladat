@@ -1,9 +1,9 @@
 export default class Measurements {
-    protected _city: string;
-    protected _time: string;
-    protected _windDirection: string;
-    protected _windSpeed: string;
-    protected _temperature: number;
+    public _city: string;
+    public _time: string;
+    public _windDirection: string;
+    public _windSpeed: string;
+    public _temperature: number;
 
     constructor(line: string) {
         const m: string[] = line.split(" ");

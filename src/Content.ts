@@ -2,7 +2,7 @@
 import http from "http"; //  https://nodejs.org/docs/latest-v14.x/api/http.html
 import { join } from "path";
 import url from "url"; //  https://nodejs.org/docs/latest-v14.x/api/url.html
-import Solution from "./solution";
+import Solution from "./Solution";
 
 export default class Content {
     public static content(req: http.IncomingMessage, res: http.ServerResponse): void {
@@ -29,7 +29,12 @@ export default class Content {
         // Kezd a kódolást innen -->
         const s: Solution = new Solution("tavirathu13.txt");
 
-        console.log(s);
+        let inputCity: string = params.get("cityCode") as string;
+        if (!inputCity) inputCity = "BP";
+        res.write("2. feladat");
+        res.write(`<label>Kérem a város kódját: <input type='text' name='cityCode' value='${inputCity}' style='max-width:150px;' onChange='this.form.submit();'></label>\n`);
+        res.write(`A(z) ${inputCity} kódú városból utoljára ${s.lastMeasurement(inputCity)} kor érkezett mérés.`);
+
         // <---- Fejezd be a kódolást
 
         res.write("</pre></form></body></html>");
