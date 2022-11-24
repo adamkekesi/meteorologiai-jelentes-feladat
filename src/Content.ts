@@ -51,7 +51,7 @@ export default class Content {
             )} kor érkezett mérés.\n`,
         );
 
-        res.write("5. feladat\n");
+        res.write("3. feladat\n");
         res.write(`A legnagyobb hőmérséklet adatai: ${s.maxTemp()} \n`);
         res.write(`A legkisebb hőmérséklet adatai: ${s.minTemp()} \n`);
 

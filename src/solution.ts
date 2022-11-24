@@ -117,11 +117,14 @@ export default class Solution {
             }
         });
 
+        let answer = "";
+
         this._weatherMesurements.forEach(m => {
             if (m.temperature === max) {
-                return `${m.city} ${m.hour} ${m.temperature}`;
+                answer = `${m.city} ${m.hour}:${m.minute} ${m.temperature} fok`;
             }
         });
+        return answer;
     }
 
     public minTemp() {
@@ -132,10 +135,13 @@ export default class Solution {
             }
         });
 
+        let answer = "";
+
         this._weatherMesurements.forEach(m => {
             if (m.temperature === min) {
-                return `${m.city} ${m.hour} ${m.temperature}`;
+                answer = `${m.city} ${m.hour}:${m.minute} ${m.temperature} fok`;
             }
         });
+        return answer;
     }
 }
