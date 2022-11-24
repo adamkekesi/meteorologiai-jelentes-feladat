@@ -136,14 +136,52 @@ export default class Solution {
         return result;
     }
 
-    public writeWindDataToFile(dir:string){
+    public maxTemp() {
+        let max = 0;
+        this._weatherMesurements.forEach(m => {
+            if (m.temperature > max) {
+                max = m.temperature;
+            }
+        });
+
+        let answer = "";
+
+        this._weatherMesurements.forEach(m => {
+            if (m.temperature === max) {
+                answer = `${m.city} ${m.hour}:${m.minute} ${m.temperature} fok`;
+            }
+        });
+        return answer;
+    }
+
+    public minTemp() {
+        let min = 20;
+        this._weatherMesurements.forEach(m => {
+            if (m.temperature < min) {
+                min = m.temperature;
+            }
+        });
+
+        let answer = "";
+
+        this._weatherMesurements.forEach(m => {
+            if (m.temperature === min) {
+                answer = `${m.city} ${m.hour}:${m.minute} ${m.temperature} fok`;
+            }
+        });
+        return answer;
+    }
+
+    public writeWindDataToFile(dir: string) {
         for (const key in this.windData) {
             const windDatas = this.windData[key];
             let content = key + "\n";
             for (const data of windDatas) {
                 content += `${data.time} ${data.windSpeed}\n`;
             }
-            writeFileSync(dir + key + ".txt", content, );
+            writeFileSync(dir + key + ".txt", content);
         }
     }
+
+
 }

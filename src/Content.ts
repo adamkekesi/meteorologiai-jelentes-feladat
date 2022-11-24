@@ -42,8 +42,18 @@ export default class Content {
         let inputCity: string = params.get("cityCode") as string;
         if (!inputCity) inputCity = "BP";
         res.write("2. feladat\n");
-        res.write(`<label>Kérem a város kódját: <input type='text' name='cityCode' value='${inputCity}' style='max-width:150px;' onChange='this.form.submit();'></label>\n`);
-        res.write(`A(z) ${inputCity} kódú városból utoljára ${s.lastMeasurement(inputCity)} kor érkezett mérés.\n`);
+        res.write(
+            `<label>Kérem a város kódját: <input type='text' name='cityCode' value='${inputCity}' style='max-width:150px;' onChange='this.form.submit();'></label>\n`,
+        );
+        res.write(
+            `A(z) ${inputCity} kódú városból utoljára ${s.lastMeasurement(
+                inputCity,
+            )} kor érkezett mérés.\n`,
+        );
+
+        res.write("3. feladat\n");
+        res.write(`A legnagyobb hőmérséklet adatai: ${s.maxTemp()} \n`);
+        res.write(`A legkisebb hőmérséklet adatai: ${s.minTemp()} \n`);
 
         res.write("4. feladat: \n");
         if (s.calmWind.length != 0) {
