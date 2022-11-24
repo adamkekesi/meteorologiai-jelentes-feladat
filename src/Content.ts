@@ -67,8 +67,9 @@ export default class Content {
         }
 
         res.write("5. feladat\n");
-        for (const key in s.cityData) {
-            const { fluctuation, mediumTemperature } = s.cityData[key];
+        const temperatureData = s.temperatureData;
+        for (const key in temperatureData) {
+            const { fluctuation, mediumTemperature } = s.temperatureData[key];
 
             if (mediumTemperature !== null) {
                 res.write(
@@ -79,6 +80,9 @@ export default class Content {
             }
         }
 
+        res.write("6. feladat\n");
+        res.write("A fájlok elkészültek.\n");
+        s.writeWindDataToFile(join(__dirname , "..\\"));
         // <---- Fejezd be a kódolást
 
         res.write("</pre></form></body></html>");

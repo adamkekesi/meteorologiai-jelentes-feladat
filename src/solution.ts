@@ -1,10 +1,15 @@
-import fs from "fs";
+import fs, { writeFileSync } from "fs";
 import Measurement from "./Measurement";
 import { Dictionary } from "./types";
 
-interface PlaceData {
+interface TemperatureData {
     mediumTemperature: number | null;
     fluctuation: number;
+}
+
+interface WindData {
+    time: string;
+    windSpeed: string;
 }
 
 export default class Solution {
@@ -49,7 +54,7 @@ export default class Solution {
         return noWindCities;
     }
 
-    public get cityData() {
+    public get temperatureData() {
         const dict: Dictionary<{
             min: number;
             max: number;
@@ -79,7 +84,7 @@ export default class Solution {
             }
         }
 
-        const result: Dictionary<PlaceData> = {};
+        const result: Dictionary<TemperatureData> = {};
 
         for (const city in dict) {
             const data = dict[city];
@@ -106,6 +111,28 @@ export default class Solution {
                 fluctuation,
             };
         }
+        return result;
+    }
+
+    public get windData() {
+        const result: Dictionary<WindData[]> = {};
+
+        for (const measurement of this._weatherMesurements) {
+            if (result[measurement.city]) {
+                result[measurement.city].push({
+                    time: measurement.timeDisplay,
+                    windSpeed: measurement.windSpeedDisplay,
+                });
+            } else {
+                result[measurement.city] = [
+                    {
+                        time: measurement.timeDisplay,
+                        windSpeed: measurement.windSpeedDisplay,
+                    },
+                ];
+            }
+        }
+
         return result;
     }
 
@@ -144,4 +171,17 @@ export default class Solution {
         });
         return answer;
     }
+
+    public writeWindDataToFile(dir: string) {
+        for (const key in this.windData) {
+            const windDatas = this.windData[key];
+            let content = key + "\n";
+            for (const data of windDatas) {
+                content += `${data.time} ${data.windSpeed}\n`;
+            }
+            writeFileSync(dir + key + ".txt", content);
+        }
+    }
+
+
 }
