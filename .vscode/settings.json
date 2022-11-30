@@ -21,7 +21,7 @@
     "git.confirmSync": false,
     "git.autofetch": true,
     "git.autofetchPeriod": 180,
-    "files.autoSave": "afterDelay",
+    "files.autoSave": "off",
     "files.eol": "\r\n",
     "files.exclude": {
         "**/.git": true,
