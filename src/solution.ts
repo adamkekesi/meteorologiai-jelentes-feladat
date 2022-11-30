@@ -78,8 +78,7 @@ export default class Solution {
                     dict[measurement.city].max = measurement.temperature;
                 }
                 if ([1, 7, 13, 19].includes(measurement.hour)) {
-                    dict[measurement.city].measurements[measurement.hour] =
-                        measurement;
+                    dict[measurement.city].measurements.push(measurement);
                 }
             }
         }
@@ -88,20 +87,24 @@ export default class Solution {
 
         for (const city in dict) {
             const data = dict[city];
-            const measurementCount = data.measurements.reduce(
-                (acc, cur) => acc + (cur ? 1 : 0),
-                0,
-            );
             let mediumTemperature: number | null;
 
-            if (measurementCount < 4) {
+            const requiredHours = [1, 7, 13, 19];
+            for (const m of data.measurements) {
+                const index = requiredHours.indexOf(m.hour);
+                if (index !== -1) {
+                    requiredHours.splice(index, 1);
+                }
+            }
+
+            if (requiredHours.length !== 0) {
                 mediumTemperature = null;
             } else {
                 const sum = data.measurements.reduce(
                     (acc, cur) => acc + cur.temperature,
                     0,
                 );
-                mediumTemperature = Math.round(sum / 4);
+                mediumTemperature = Math.round(sum / data.measurements.length);
             }
 
             const fluctuation = data.max - data.min;
@@ -179,9 +182,11 @@ export default class Solution {
             for (const data of windDatas) {
                 content += `${data.time} ${data.windSpeed}\n`;
             }
+            if (!fs.existsSync(dir)) {
+                fs.mkdirSync(dir, { recursive: true });
+            }
+
             writeFileSync(dir + key + ".txt", content);
         }
     }
-
-
 }
