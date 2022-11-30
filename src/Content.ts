@@ -82,7 +82,7 @@ export default class Content {
 
         res.write("6. feladat\n");
         res.write("A fájlok elkészültek.\n");
-        s.writeWindDataToFile(join(__dirname, "..\\"));
+        s.writeWindDataToFile(join(__dirname, "..\\output\\"));
         // <---- Fejezd be a kódolást
 
         res.write("</pre></form></body></html>");
