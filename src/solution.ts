@@ -49,6 +49,7 @@ export default class Solution {
                 parseInt(e.windSpeed) === 0
             ) {
                 noWindCities.push(e);
+                console.log(e);
             }
         });
         return noWindCities;
@@ -182,6 +183,4 @@ export default class Solution {
             writeFileSync(dir + key + ".txt", content);
         }
     }
-
-
 }
