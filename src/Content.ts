@@ -1,4 +1,4 @@
-﻿import fs from "fs"; //  https://nodejs.org/docs/latest-v14.x/api/fs.html
+﻿import fs, { readFileSync } from "fs"; //  https://nodejs.org/docs/latest-v14.x/api/fs.html
 import http from "http"; //  https://nodejs.org/docs/latest-v14.x/api/http.html
 import { join } from "path";
 import url from "url"; //  https://nodejs.org/docs/latest-v14.x/api/url.html
@@ -82,7 +82,15 @@ export default class Content {
 
         res.write("6. feladat\n");
         res.write("A fájlok elkészültek.\n");
-        s.writeWindDataToFile(join(__dirname, "..\\output\\"));
+        const path = join(__dirname, "..\\output\\");
+        for (const fileName of fs.readdirSync(path)) {
+            const content = readFileSync(join(path, fileName)).toString(
+                "utf-8",
+            );
+            res.write(fileName + ":\n");
+            res.write(content);
+        }
+        s.writeWindDataToFile(path);
         // <---- Fejezd be a kódolást
 
         res.write("</pre></form></body></html>");
